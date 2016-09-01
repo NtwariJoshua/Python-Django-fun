@@ -22,6 +22,7 @@ before_install:
   - export DJANGO_SETTINGS_MODULE=simple_crm.settings
   - export PYTHONPATH=$HOME/builds/NtwariJoshua/Python-Django-fun
   - export PIP_USE_MIRRORS=true
+  - export TRAVIS=true
 
 install:
   - pip install -r requirements.txt
