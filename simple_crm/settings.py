@@ -31,7 +31,7 @@ def get_env_variable(var_name):
 # Get ENV_variable key
 
 ENV_ROLE = get_env_variable('ENV_ROLE')
-
+TRAVIS = get_env_variable('TRAVIS')
 PROJECT_PATH = os.path.join(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -97,22 +97,33 @@ WSGI_APPLICATION = 'simple_crm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'simple-crm',
-        'USER': 'Josh',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432'
+if TRAVIS is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'travisci',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # }
+
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'simple-crm',
+            'USER': 'Josh',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
