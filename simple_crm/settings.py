@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'simple_crm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-if TRAVIS is True:
+if TRAVIS == True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
